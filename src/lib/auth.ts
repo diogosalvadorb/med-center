@@ -27,15 +27,17 @@ export const auth = betterAuth({
           clinic: true,
         },
       });
-      // TODO: multiplas clinicas
-      const clinic = clinics[0];
+       // TODO: multiplas clinicas
+      const clinic = clinics?.[0];
       return {
         user: {
           ...user,
-          clinic: {
-            id: clinic.clinicId,
-            name: clinic.clinic.name,
-          },
+          clinic: clinic?.clinicId
+            ? {
+                id: clinic?.clinicId,
+                name: clinic?.clinic?.name,
+              }
+            : undefined,
         },
         session,
       };
